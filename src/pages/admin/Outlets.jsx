@@ -10,11 +10,20 @@ import {
   MapPin,
   Phone,
   Eye,
+  Settings,
+  Shield,
+  UserCheck,
+  Edit,
+  Trash2,
+  Lock,
+  Unlock,
 } from "lucide-react";
 import { StatCard } from "@/components/ui/stat-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // Mock data for outlets
 const outletStats = {
@@ -97,14 +106,274 @@ const Outlets = () => {
   return (
     <div className="space-y-6 animate-in fade-in-0 slide-in-from-bottom-4 duration-700">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-foreground mb-2">
-          Outlet Management
-        </h1>
-        <p className="text-muted-foreground">
-          Monitor and manage all your TiffinOS outlets across different locations
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-foreground mb-2">
+            Outlet Management
+          </h1>
+          <p className="text-muted-foreground">
+            Monitor and manage all your TiffinOS outlets across different
+            locations
+          </p>
+        </div>
+        <Button variant="outline" className="gap-2">
+          <Shield className="h-4 w-4" />
+          Manage Permissions
+        </Button>
       </div>
+
+      {/* Permissions Section */}
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Shield className="h-5 w-5 text-primary" />
+            Outlet Permissions
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Tabs defaultValue="roles" className="w-full">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="roles">Role Permissions</TabsTrigger>
+              <TabsTrigger value="users">User Permissions</TabsTrigger>
+              <TabsTrigger value="outlet-access">Outlet Access</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="roles" className="space-y-6">
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {/* Admin Role */}
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <UserCheck className="h-5 w-5 text-primary" />
+                      Admin
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">View Outlet</span>
+                        <Switch defaultChecked disabled />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Manage Outlet
+                        </span>
+                        <Switch defaultChecked disabled />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">Edit Outlet</span>
+                        <Switch defaultChecked disabled />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Delete Outlet
+                        </span>
+                        <Switch defaultChecked disabled />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Manage Staff
+                        </span>
+                        <Switch defaultChecked disabled />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          View Reports
+                        </span>
+                        <Switch defaultChecked disabled />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Manager Role */}
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Settings className="h-5 w-5 text-accent" />
+                      Manager
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">View Outlet</span>
+                        <Switch defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Manage Outlet
+                        </span>
+                        <Switch defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">Edit Outlet</span>
+                        <Switch defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Delete Outlet
+                        </span>
+                        <Switch />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Manage Staff
+                        </span>
+                        <Switch defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          View Reports
+                        </span>
+                        <Switch defaultChecked />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Staff Role */}
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Users className="h-5 w-5 text-muted-foreground" />
+                      Staff
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">View Outlet</span>
+                        <Switch defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Manage Outlet
+                        </span>
+                        <Switch />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">Edit Outlet</span>
+                        <Switch />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Delete Outlet
+                        </span>
+                        <Switch />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Manage Staff
+                        </span>
+                        <Switch />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          View Reports
+                        </span>
+                        <Switch />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="users" className="space-y-4">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 border rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                      <UserCheck className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-medium">Rajesh Kumar</p>
+                      <p className="text-sm text-muted-foreground">
+                        Manager - MVP Colony
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <Badge variant="outline">Manager</Badge>
+                    <Button variant="outline" size="sm">
+                      <Edit className="h-4 w-4 mr-2" />
+                      Edit Permissions
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between p-4 border rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
+                      <Users className="h-5 w-5 text-accent" />
+                    </div>
+                    <div>
+                      <p className="font-medium">Priya Sharma</p>
+                      <p className="text-sm text-muted-foreground">
+                        Staff - Maddilapalem
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <Badge variant="outline">Staff</Badge>
+                    <Button variant="outline" size="sm">
+                      <Edit className="h-4 w-4 mr-2" />
+                      Edit Permissions
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="outlet-access" className="space-y-4">
+              <div className="space-y-4">
+                {outlets.map((outlet) => (
+                  <Card key={outlet.id}>
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg">{outlet.name}</CardTitle>
+                        <div className="flex items-center gap-2">
+                          <Lock className="h-4 w-4 text-muted-foreground" />
+                          <span className="text-sm text-muted-foreground">
+                            Restricted Access
+                          </span>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium">
+                            Manager Access
+                          </span>
+                          <Switch defaultChecked />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium">
+                            Staff Access
+                          </span>
+                          <Switch defaultChecked />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium">Read Only</span>
+                          <Switch />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium">
+                            Full Control
+                          </span>
+                          <Switch />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </CardContent>
+      </Card>
 
       {/* Overview Stats */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -166,14 +435,18 @@ const Outlets = () => {
                   <p className="text-xs text-muted-foreground font-medium">
                     Contact Person
                   </p>
-                  <p className="text-sm font-medium mt-1">{outlet.contactPerson}</p>
+                  <p className="text-sm font-medium mt-1">
+                    {outlet.contactPerson}
+                  </p>
                 </div>
                 <div>
                   <div className="flex items-center gap-1 text-xs text-muted-foreground font-medium">
                     <Clock className="h-3 w-3" />
                     Hours
                   </div>
-                  <p className="text-sm font-medium mt-1">{outlet.openingHours}</p>
+                  <p className="text-sm font-medium mt-1">
+                    {outlet.openingHours}
+                  </p>
                 </div>
               </div>
 
@@ -239,7 +512,11 @@ const Outlets = () => {
                   <p className="text-xs text-muted-foreground font-medium mb-2">
                     Traffic
                   </p>
-                  <div className={`text-sm font-medium ${getTrafficColor(outlet.traffic)}`}>
+                  <div
+                    className={`text-sm font-medium ${getTrafficColor(
+                      outlet.traffic
+                    )}`}
+                  >
                     {outlet.traffic} Traffic
                   </div>
                 </div>
@@ -272,7 +549,10 @@ const Outlets = () => {
                   <Eye className="h-4 w-4" />
                   View Details
                 </Button>
-                <Button size="sm" className="w-full bg-primary hover:bg-primary/90">
+                <Button
+                  size="sm"
+                  className="w-full bg-primary hover:bg-primary/90"
+                >
                   Manage Outlet
                 </Button>
               </div>

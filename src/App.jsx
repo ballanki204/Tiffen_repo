@@ -15,6 +15,14 @@ import DailySales from "./pages/admin/reports/DailySales";
 import ConsumptionVsSales from "./pages/admin/reports/ConsumptionVsSales";
 import WastageReport from "./pages/admin/reports/WastageReport";
 import FoodCost from "./pages/admin/reports/FoodCost";
+import MultiVendorDashboard from "./pages/admin/MultiVendor/Dashboard";
+import VendorsPage from "./pages/admin/MultiVendor/Vendors";
+import StoresPage from "./pages/admin/MultiVendor/Stores";
+import StoreDashboard from "./pages/admin/StoreDashboard";
+import UsersPage from "./pages/admin/Users";
+import RidersPage from "./pages/admin/Riders";
+import StaffPage from "./pages/admin/Staff";
+import SettingsPage from "./pages/admin/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +48,25 @@ const App = () => (
               <Route path="food-cost" element={<FoodCost />} />
             </Route>
             <Route path="profile" element={<AdminProfile />} />
+
+            {/* Management Routes */}
+            <Route path="users" element={<UsersPage />} />
+            <Route path="riders" element={<RidersPage />} />
+            <Route path="staff" element={<StaffPage />} />
+
+            {/* Multi-Vendor Routes */}
+            <Route path="multi-vendor" element={<MultiVendorDashboard />} />
+            <Route path="multi-vendor/vendors" element={<VendorsPage />} />
+            <Route path="multi-vendor/stores" element={<StoresPage />} />
+
+            {/* Store Dashboard Route */}
+            <Route
+              path="store-dashboard/:storeId"
+              element={<StoreDashboard />}
+            />
+
+            {/* Settings */}
+            <Route path="settings" element={<SettingsPage />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
