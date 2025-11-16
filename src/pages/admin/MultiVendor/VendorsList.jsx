@@ -228,9 +228,7 @@ export const VendorsList = ({ onSelectVendor }) => {
                     <TableCell className="text-center">
                       <Badge
                         variant={
-                          vendor.status === "active"
-                            ? "default"
-                            : "secondary"
+                          vendor.status === "active" ? "default" : "secondary"
                         }
                         className={
                           vendor.status === "active"
@@ -254,7 +252,10 @@ export const VendorsList = ({ onSelectVendor }) => {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan="7" className="text-center text-muted-foreground py-8">
+                  <TableCell
+                    colSpan="7"
+                    className="text-center text-muted-foreground py-8"
+                  >
                     No vendors found
                   </TableCell>
                 </TableRow>

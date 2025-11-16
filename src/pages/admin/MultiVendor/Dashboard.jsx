@@ -67,7 +67,10 @@ const MultiVendorDashboard = () => {
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (
-            <Card key={stat.label} className="shadow-card hover:shadow-lg transition-shadow">
+            <Card
+              key={stat.label}
+              className="shadow-card hover:shadow-lg transition-shadow"
+            >
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
@@ -94,14 +97,18 @@ const MultiVendorDashboard = () => {
             <CardContent className="p-4 text-center">
               <div className="text-3xl mb-2">🏪</div>
               <p className="font-semibold text-sm">Vendors</p>
-              <p className="text-xs text-muted-foreground mt-1">Manage vendors</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Manage vendors
+              </p>
             </CardContent>
           </Card>
           <Card className="shadow-card hover:shadow-lg transition-all cursor-pointer border-2 border-transparent hover:border-primary">
             <CardContent className="p-4 text-center">
               <div className="text-3xl mb-2">🏢</div>
               <p className="font-semibold text-sm">Stores</p>
-              <p className="text-xs text-muted-foreground mt-1">Store locations</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Store locations
+              </p>
             </CardContent>
           </Card>
           <Card className="shadow-card hover:shadow-lg transition-all cursor-pointer border-2 border-transparent hover:border-primary">
@@ -115,7 +122,9 @@ const MultiVendorDashboard = () => {
             <CardContent className="p-4 text-center">
               <div className="text-3xl mb-2">🚴</div>
               <p className="font-semibold text-sm">Riders</p>
-              <p className="text-xs text-muted-foreground mt-1">Delivery staff</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Delivery staff
+              </p>
             </CardContent>
           </Card>
           <Card className="shadow-card hover:shadow-lg transition-all cursor-pointer border-2 border-transparent hover:border-primary">
