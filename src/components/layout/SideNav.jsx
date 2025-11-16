@@ -12,27 +12,53 @@ import {
   ChevronDown,
   Settings,
   Zap,
+  Percent,
+  Utensils,
+  Image,
+  DollarSign,
+  Calculator,
+  Bell,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { cn } from "@/lib/utils";
 
 const menuSections = [
   {
-    section: "General",
+    section: "Dashboard",
     items: [
       { to: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+    ],
+  },
+  {
+    section: "General",
+    items: [
       { to: "/admin/outlets", icon: Store, label: "Outlets" },
-      { to: "/admin/multi-vendor", icon: Building2, label: "Multi-Vendor" },
-      { to: "/admin/multi-vendor/vendors", icon: Store, label: "Vendors" },
-      { to: "/admin/multi-vendor/stores", icon: Package, label: "Stores" },
+      { to: "/admin/users", icon: Users, label: "Users" },
+      { to: "/admin/riders", icon: Bike, label: "Riders" },
+      { to: "/admin/staff", icon: UserCheck, label: "Staff" },
+      { to: "/admin/vendors", icon: Building2, label: "Vendors" },
+      { to: "/admin/stores", icon: Package, label: "Stores" },
     ],
   },
   {
     section: "Management",
     items: [
-      { to: "/admin/users", icon: Users, label: "Users" },
-      { to: "/admin/riders", icon: Bike, label: "Riders" },
-      { to: "/admin/staff", icon: UserCheck, label: "Staff" },
+      { to: "/admin/orders", icon: Package, label: "Orders" },
+      { to: "/admin/coupons", icon: Percent, label: "Coupons" },
+      { to: "/admin/cuisine", icon: Utensils, label: "Cuisine" },
+      { to: "/admin/banners", icon: Image, label: "Banners" },
+      { to: "/admin/tipping", icon: DollarSign, label: "Tipping" },
+      {
+        to: "/admin/commission-rates",
+        icon: Calculator,
+        label: "Commission Rates",
+      },
+      {
+        to: "/admin/withdraw-requests",
+        icon: Building2,
+        label: "Withdraw Requests",
+      },
+      { to: "/admin/notifications", icon: Bell, label: "Notifications" },
       { to: "/admin/reports", icon: FileText, label: "Reports" },
       { to: "/admin/items", icon: Package, label: "Items" },
       {
@@ -57,7 +83,8 @@ const menuSections = [
 
 export const SideNav = ({ collapsed = false }) => {
   const [expandedSections, setExpandedSections] = useState({
-    General: !collapsed,
+    Dashboard: !collapsed,
+    General: false,
     Management: false,
     Settings: false,
   });

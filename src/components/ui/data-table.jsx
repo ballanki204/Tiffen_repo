@@ -46,7 +46,9 @@ export function DataTable({ title, data, columns, actions }) {
                   >
                     {columns.map((column) => (
                       <TableCell key={column.key}>
-                        {column.render ? column.render(item) : item[column.key]}
+                        {column.render
+                          ? column.render(item, index)
+                          : item[column.key]}
                       </TableCell>
                     ))}
                   </TableRow>

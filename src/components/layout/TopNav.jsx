@@ -26,13 +26,17 @@ export const TopNav = ({ onMenuClick, collapsed }) => {
             variant="ghost"
             size="icon"
             onClick={onMenuClick}
-            className="hover-accent transition-smooth"
+            className="hover-accent transition-smooth md:hidden"
           >
             <Menu className="h-5 w-5" />
           </Button>
           <div className="flex items-center gap-2">
             <ChefHat className="h-6 w-6 text-primary" />
-            {!collapsed && <span className="text-xl font-bold text-foreground">TiffinOS</span>}
+            {!collapsed && (
+              <span className="text-xl font-bold text-foreground">
+                TiffinOS
+              </span>
+            )}
           </div>
         </div>
 
@@ -40,7 +44,9 @@ export const TopNav = ({ onMenuClick, collapsed }) => {
           {!collapsed && (
             <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full">
               <div className="h-2 w-2 bg-success rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-primary">Admin Panel</span>
+              <span className="text-sm font-medium text-primary">
+                Admin Panel
+              </span>
             </div>
           )}
 
@@ -51,7 +57,9 @@ export const TopNav = ({ onMenuClick, collapsed }) => {
                 className="relative h-10 w-10 rounded-full"
               >
                 <Avatar className="h-10 w-10">
-                  <AvatarFallback className="bg-primary text-primary-foreground">AD</AvatarFallback>
+                  <AvatarFallback className="bg-primary text-primary-foreground">
+                    AD
+                  </AvatarFallback>
                 </Avatar>
                 {!collapsed && <span className="sr-only">Open admin menu</span>}
               </Button>

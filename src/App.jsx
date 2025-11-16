@@ -23,6 +23,16 @@ import UsersPage from "./pages/admin/Users";
 import RidersPage from "./pages/admin/Riders";
 import StaffPage from "./pages/admin/Staff";
 import SettingsPage from "./pages/admin/Settings";
+import Vendors from "./pages/admin/Vendors";
+import Stores from "./pages/admin/Stores";
+import Orders from "./pages/admin/Orders";
+import Coupons from "./pages/admin/Coupons";
+import Cuisine from "./pages/admin/Cuisine";
+import Banners from "./pages/admin/Banners";
+import Tipping from "./pages/admin/Tipping";
+import CommissionRates from "./pages/admin/CommissionRates";
+import WithdrawRequests from "./pages/admin/WithdrawRequests";
+import Notifications from "./pages/admin/Notifications";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,11 +40,17 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <BrowserRouter>
+      <BrowserRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
         <Routes>
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="outlets" element={<Outlets />} />
             <Route path="items" element={<Items />} />
@@ -64,6 +80,22 @@ const App = () => (
               path="store-dashboard/:storeId"
               element={<StoreDashboard />}
             />
+
+            {/* Vendors */}
+            <Route path="vendors" element={<Vendors />} />
+
+            {/* Stores */}
+            <Route path="stores" element={<Stores />} />
+
+            {/* Management Routes */}
+            <Route path="orders" element={<Orders />} />
+            <Route path="coupons" element={<Coupons />} />
+            <Route path="cuisine" element={<Cuisine />} />
+            <Route path="banners" element={<Banners />} />
+            <Route path="tipping" element={<Tipping />} />
+            <Route path="commission-rates" element={<CommissionRates />} />
+            <Route path="withdraw-requests" element={<WithdrawRequests />} />
+            <Route path="notifications" element={<Notifications />} />
 
             {/* Settings */}
             <Route path="settings" element={<SettingsPage />} />

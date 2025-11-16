@@ -155,7 +155,7 @@ const Items = () => {
     {
       key: "actions",
       label: "Actions",
-      render: () => (
+      render: (item, index) => (
         <div className="flex items-center gap-2">
           <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
             <Edit className="h-4 w-4" />
@@ -195,7 +195,7 @@ const Items = () => {
     {
       key: "actions",
       label: "Actions",
-      render: () => (
+      render: (item, index) => (
         <div className="flex items-center gap-2">
           <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
             <Edit className="h-4 w-4" />
@@ -244,7 +244,7 @@ const Items = () => {
             />
           </div>
           <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-            <DialogTrigger>
+            <DialogTrigger asChild>
               <Button className="gap-2">
                 <Plus className="h-4 w-4" />
                 Add Item
@@ -321,7 +321,9 @@ const Items = () => {
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="text-lg font-semibold">Idli (Steamed)</h3>
-                  <p className="text-xs text-muted-foreground">Soft steamed idlis prepared from fermented rice batter</p>
+                  <p className="text-xs text-muted-foreground">
+                    Soft steamed idlis prepared from fermented rice batter
+                  </p>
                 </div>
                 <Badge variant="secondary">Ready</Badge>
               </div>
@@ -336,7 +338,9 @@ const Items = () => {
                 </div>
               </div>
               <div className="flex items-center gap-2 mt-4">
-                <Button size="sm" variant="outline">View Recipe</Button>
+                <Button size="sm" variant="outline">
+                  View Recipe
+                </Button>
                 <Button size="sm">Manage</Button>
               </div>
             </div>
@@ -345,7 +349,9 @@ const Items = () => {
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="text-lg font-semibold">Dosa (Pan-cooked)</h3>
-                  <p className="text-xs text-muted-foreground">Crispy dosa made from fermented batter, served hot</p>
+                  <p className="text-xs text-muted-foreground">
+                    Crispy dosa made from fermented batter, served hot
+                  </p>
                 </div>
                 <Badge variant="warning">Low Stock</Badge>
               </div>
@@ -360,7 +366,9 @@ const Items = () => {
                 </div>
               </div>
               <div className="flex items-center gap-2 mt-4">
-                <Button size="sm" variant="outline">View Recipe</Button>
+                <Button size="sm" variant="outline">
+                  View Recipe
+                </Button>
                 <Button size="sm">Manage</Button>
               </div>
             </div>
@@ -376,7 +384,9 @@ const Items = () => {
               </div>
               <div className="mt-3 grid gap-3 md:grid-cols-2">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Ingredients</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Ingredients
+                  </p>
                   <ul className="list-disc pl-5 mt-2 text-sm">
                     <li>Parboiled Rice - 2 cups</li>
                     <li>Urad Dal (split) - 1 cup</li>
@@ -386,11 +396,19 @@ const Items = () => {
                   </ul>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Steps</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Steps
+                  </p>
                   <ol className="list-decimal pl-5 mt-2 text-sm">
                     <li>Soak rice and urad dal separately for 4-6 hours.</li>
-                    <li>Grind urad dal to a smooth batter, grind rice slightly coarse.</li>
-                    <li>Mix both batters, add salt and ferment overnight (8-12 hrs).</li>
+                    <li>
+                      Grind urad dal to a smooth batter, grind rice slightly
+                      coarse.
+                    </li>
+                    <li>
+                      Mix both batters, add salt and ferment overnight (8-12
+                      hrs).
+                    </li>
                     <li>Steam idlis in moulds for 10-12 minutes.</li>
                   </ol>
                 </div>
@@ -404,7 +422,9 @@ const Items = () => {
               </div>
               <div className="mt-3 grid gap-3 md:grid-cols-2">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Ingredients</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Ingredients
+                  </p>
                   <ul className="list-disc pl-5 mt-2 text-sm">
                     <li>Parboiled Rice - 3 cups</li>
                     <li>Urad Dal - 1 cup</li>
@@ -413,11 +433,16 @@ const Items = () => {
                   </ul>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Steps</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Steps
+                  </p>
                   <ol className="list-decimal pl-5 mt-2 text-sm">
                     <li>Soak rice and urad dal separately for 4-6 hours.</li>
                     <li>Grind to a flowing batter, add salt and ferment.</li>
-                    <li>Heat dosa tawa, pour batter in a circle and cook until crisp.</li>
+                    <li>
+                      Heat dosa tawa, pour batter in a circle and cook until
+                      crisp.
+                    </li>
                     <li>Serve hot with chutney and sambar.</li>
                   </ol>
                 </div>

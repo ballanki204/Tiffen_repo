@@ -15,6 +15,22 @@ A modern, responsive admin dashboard for managing tiffin services, built with Re
   - Wastage Report
   - Food Cost Analysis
 - **Admin Profile**: User profile management and settings
+- **Management Sections**:
+  - Users: Manage user accounts and roles
+  - Riders: Handle delivery personnel
+  - Staff: Administer staff members
+  - Vendors: Manage vendor partnerships
+  - Stores: Oversee store operations
+  - Orders: Track and manage all orders
+  - Coupons: Create and manage discount codes
+  - Cuisine: Manage food categories
+  - Banners: Handle promotional content
+  - Tipping: Configure tip options and analytics
+  - Commission Rates: Set vendor earnings
+  - Withdraw Requests: Process vendor payouts
+  - Notifications: Send user communications
+- **Multi-Vendor System**: Support for multiple vendors with dedicated dashboards
+- **Settings**: Application configuration and preferences
 - **Responsive Design**: Optimized for desktop and mobile devices
 - **Modern UI**: Clean, intuitive interface using ShadCN UI components
 
@@ -73,7 +89,10 @@ A modern, responsive admin dashboard for managing tiffin services, built with Re
 4. **Manage Items**: Update menu items and inventory levels
 5. **Vendor Management**: Handle supplier information and purchase orders
 6. **Reports**: Generate and view various business reports
-7. **Profile**: Update admin settings and preferences
+7. **Management Sections**: Access various management areas including Users, Riders, Staff, Vendors, Stores, Orders, Coupons, Cuisine, Banners, Tipping, Commission Rates, Withdraw Requests, and Notifications
+8. **Multi-Vendor Dashboard**: Manage multiple vendors and their stores
+9. **Settings**: Configure application preferences
+10. **Profile**: Update admin settings and preferences
 
 ## Project Structure
 
@@ -87,7 +106,8 @@ src/
 ├── lib/                 # Utility functions and configurations
 ├── pages/
 │   ├── admin/           # Admin pages (Dashboard, Items, Outlets, etc.)
-│   ├── admin/reports/   # Report pages
+│   │   ├── reports/     # Report pages (PLStatement, DailySales, etc.)
+│   │   └── MultiVendor/ # Multi-vendor pages (Dashboard, Vendors, Stores)
 │   ├── Login.jsx        # Login page
 │   ├── NotFound.jsx     # 404 page
 │   └── Index.jsx        # Home/index page
