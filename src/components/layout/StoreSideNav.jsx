@@ -166,11 +166,13 @@ export const StoreSideNav = ({ collapsed = false }) => {
                     <NavLink
                       key={item.to}
                       to={item.to}
-                      className={cn(
-                        "flex items-center gap-3 px-3 py-2.5 rounded-lg text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors text-sm relative",
-                        collapsed ? "justify-center" : "pl-4"
-                      )}
-                      activeClassName="bg-primary/10 text-primary font-medium"
+                      className={({ isActive }) =>
+                        cn(
+                          "flex items-center gap-3 px-3 py-2.5 rounded-lg text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors text-sm relative",
+                          collapsed ? "justify-center" : "pl-4",
+                          isActive && "bg-primary/10 text-primary font-medium"
+                        )
+                      }
                       onClick={(e) => {
                         if (item.comingSoon) {
                           e.preventDefault();

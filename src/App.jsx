@@ -20,6 +20,17 @@ import MultiVendorDashboard from "./pages/admin/MultiVendor/Dashboard";
 import VendorsPage from "./pages/admin/MultiVendor/Vendors";
 import StoresPage from "./pages/admin/MultiVendor/Stores";
 import StoreDashboard from "./pages/admin/StoreDashboard";
+import StoreProfile from "./pages/admin/store/StoreProfile";
+import StoreTiming from "./pages/admin/store/StoreTiming";
+import StoreLocation from "./pages/admin/store/StoreLocation";
+import StorePayment from "./pages/admin/store/StorePayment";
+import StoreProducts from "./pages/admin/store/StoreProducts";
+import StoreCategory from "./pages/admin/store/StoreCategory";
+import StoreOptions from "./pages/admin/store/StoreOptions";
+import StoreAddon from "./pages/admin/store/StoreAddon";
+import StoreOrders from "./pages/admin/store/StoreOrders";
+import StoreMarketing from "./pages/admin/store/StoreMarketing";
+import StoreReviews from "./pages/admin/store/StoreReviews";
 import UsersPage from "./pages/admin/Users";
 import RidersPage from "./pages/admin/Riders";
 import StaffPage from "./pages/admin/Staff";
@@ -100,7 +111,20 @@ const App = () => (
           <Route
             path="/admin/store-dashboard/:storeId"
             element={<StoreLayout />}
-          />
+          >
+            <Route index element={<StoreDashboard />} />
+            <Route path="profile" element={<StoreProfile />} />
+            <Route path="timing" element={<StoreTiming />} />
+            <Route path="location" element={<StoreLocation />} />
+            <Route path="payment" element={<StorePayment />} />
+            <Route path="products" element={<StoreProducts />} />
+            <Route path="category" element={<StoreCategory />} />
+            <Route path="options" element={<StoreOptions />} />
+            <Route path="addon" element={<StoreAddon />} />
+            <Route path="orders" element={<StoreOrders />} />
+            <Route path="marketing" element={<StoreMarketing />} />
+            <Route path="reviews" element={<StoreReviews />} />
+          </Route>
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
