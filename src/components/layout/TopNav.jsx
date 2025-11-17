@@ -34,7 +34,7 @@ export const TopNav = ({ onMenuClick, collapsed }) => {
             <ChefHat className="h-6 w-6 text-primary" />
             {!collapsed && (
               <span className="text-xl font-bold text-foreground">
-                TiffinOS
+                TheNexUS
               </span>
             )}
           </div>

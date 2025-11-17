@@ -45,7 +45,7 @@ const Login = () => {
           <div className="space-y-2">
             <CardTitle className="text-3xl font-bold">TiffinOS Admin</CardTitle>
             <CardDescription className="text-base">
-              Sign in to access your admin dashboard
+              Developed by Team TheNexUs
             </CardDescription>
           </div>
         </CardHeader>
