@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Search,
   Filter,
@@ -7,11 +8,16 @@ import {
   MapPin,
   Eye,
   Store as StoreIcon,
+  Shield,
+  UserCheck,
+  Settings,
+  Users,
+  Edit,
+  Lock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import {
   DropdownMenu,
@@ -30,6 +36,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // Mock data for vendors
 const vendors = [
@@ -118,7 +125,52 @@ const stores = [
   },
 ];
 
+// Mock data for outlets
+const outlets = [
+  {
+    id: 1,
+    name: "MVPColony",
+    location: "MVP Colony, Visakhapatnam",
+    phone: "+91-9876543210",
+    openingHours: "6:00 AM - 10:00 PM",
+    todaySales: "₹64,240",
+    orderCount: 580,
+    staffCount: 8,
+    stockStatus: "Critical",
+    refillRequests: 5,
+    traffic: "High",
+    contactPerson: "Rajesh Kumar",
+    coordinates: "17.8505° N, 83.3063° E",
+    metrics: {
+      salesTrend: 15.2,
+      orderTrend: 12.5,
+      staffEfficiency: 94,
+    },
+  },
+  {
+    id: 2,
+    name: "Maddilapalem",
+    location: "Maddilapalem, Visakhapatnam",
+    phone: "+91-9876543211",
+    openingHours: "6:00 AM - 10:00 PM",
+    todaySales: "₹62,240",
+    orderCount: 570,
+    staffCount: 7,
+    stockStatus: "Low",
+    refillRequests: 3,
+    traffic: "Medium",
+    contactPerson: "Priya Sharma",
+    coordinates: "17.7700° N, 83.2833° E",
+    metrics: {
+      salesTrend: 10.8,
+      orderTrend: 9.3,
+      staffEfficiency: 91,
+    },
+  },
+];
+
 const Vendors = () => {
+  const navigate = useNavigate();
   const [selectedVendor, setSelectedVendor] = useState(1);
   const [vendorFilter, setVendorFilter] = useState("All");
   const [storeFilter, setStoreFilter] = useState("All");
@@ -132,6 +184,17 @@ const Vendors = () => {
     name: "",
     email: "",
     address: "",
+  });
+  const [isEditPermissionsDialogOpen, setIsEditPermissionsDialogOpen] =
+    useState(false);
+  const [editingUser, setEditingUser] = useState(null);
+  const [userPermissions, setUserPermissions] = useState({
+    viewOutlet: true,
+    manageOutlet: false,
+    editOutlet: false,
+    deleteOutlet: false,
+    manageStaff: false,
+    viewReports: false,
   });
 
   const handleAddVendor = () => {
@@ -155,6 +218,26 @@ const Vendors = () => {
     });
   };
 
+  const handleEditPermissions = (user) => {
+    setEditingUser(user);
+    setUserPermissions({
+      viewOutlet: user.permissions?.viewOutlet || true,
+      manageOutlet: user.permissions?.manageOutlet || false,
+      editOutlet: user.permissions?.editOutlet || false,
+      deleteOutlet: user.permissions?.deleteOutlet || false,
+      manageStaff: user.permissions?.manageStaff || false,
+      viewReports: user.permissions?.viewReports || false,
+    });
+    setIsEditPermissionsDialogOpen(true);
+  };
+
+  const handleSavePermissions = () => {
+    console.log("Saving permissions for user:", editingUser, userPermissions);
+    // In a real app, this would make an API call to update user permissions
+    setIsEditPermissionsDialogOpen(false);
+    setEditingUser(null);
+  };
+
   return (
     <div className="space-y-6 animate-in fade-in-0 slide-in-from-bottom-4 duration-700">
       <div>
@@ -165,10 +248,300 @@ const Vendors = () => {
           Manage your vendors and their store locations
         </p>
       </div>
+      {/* Permissions Section */}
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Shield className="h-5 w-5 text-primary" />
+            Outlet Permissions
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Tabs defaultValue="roles" className="w-full">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="roles">Role Permissions</TabsTrigger>
+              <TabsTrigger value="users">User Permissions</TabsTrigger>
+              <TabsTrigger value="outlet-access">Outlet Access</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="roles" className="space-y-6">
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {/* Admin Role */}
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <UserCheck className="h-5 w-5 text-primary" />
+                      Admin
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">View Outlet</span>
+                        <Switch defaultChecked disabled />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Manage Outlet
+                        </span>
+                        <Switch defaultChecked disabled />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">Edit Outlet</span>
+                        <Switch defaultChecked disabled />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Delete Outlet
+                        </span>
+                        <Switch defaultChecked disabled />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Manage Staff
+                        </span>
+                        <Switch defaultChecked disabled />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          View Reports
+                        </span>
+                        <Switch defaultChecked disabled />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Manager Role */}
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Settings className="h-5 w-5 text-accent" />
+                      Manager
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">View Outlet</span>
+                        <Switch defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Manage Outlet
+                        </span>
+                        <Switch defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">Edit Outlet</span>
+                        <Switch defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Delete Outlet
+                        </span>
+                        <Switch />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Manage Staff
+                        </span>
+                        <Switch defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          View Reports
+                        </span>
+                        <Switch defaultChecked />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Staff Role */}
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Users className="h-5 w-5 text-muted-foreground" />
+                      Staff
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">View Outlet</span>
+                        <Switch defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Manage Outlet
+                        </span>
+                        <Switch />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">Edit Outlet</span>
+                        <Switch />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Delete Outlet
+                        </span>
+                        <Switch />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          Manage Staff
+                        </span>
+                        <Switch />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          View Reports
+                        </span>
+                        <Switch />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="users" className="space-y-4">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 border rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                      <UserCheck className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-medium">Rajesh Kumar</p>
+                      <p className="text-sm text-muted-foreground">
+                        Manager - MVP Colony
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    {/* <Badge variant="outline">Manager</Badge> */}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        handleEditPermissions({
+                          id: 1,
+                          name: "Rajesh Kumar",
+                          role: "Manager",
+                          outlet: "MVP Colony",
+                          permissions: {
+                            viewOutlet: true,
+                            manageOutlet: true,
+                            editOutlet: true,
+                            deleteOutlet: false,
+                            manageStaff: true,
+                            viewReports: true,
+                          },
+                        })
+                      }
+                    >
+                      <Edit className="h-4 w-4 mr-2" />
+                      Edit Permissions
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between p-4 border rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
+                      <Users className="h-5 w-5 text-accent" />
+                    </div>
+                    <div>
+                      <p className="font-medium">Priya Sharma</p>
+                      <p className="text-sm text-muted-foreground">
+                        Staff - Maddilapalem
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    {/* <Badge variant="outline">Staff</Badge> */}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        handleEditPermissions({
+                          id: 2,
+                          name: "Priya Sharma",
+                          role: "Staff",
+                          outlet: "Maddilapalem",
+                          permissions: {
+                            viewOutlet: true,
+                            manageOutlet: false,
+                            editOutlet: false,
+                            deleteOutlet: false,
+                            manageStaff: false,
+                            viewReports: false,
+                          },
+                        })
+                      }
+                    >
+                      <Edit className="h-4 w-4 mr-2" />
+                      Edit Permissions
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="outlet-access" className="space-y-4">
+              <div className="space-y-4">
+                {outlets.map((outlet) => (
+                  <Card key={outlet.id}>
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg">{outlet.name}</CardTitle>
+                        <div className="flex items-center gap-2">
+                          <Lock className="h-4 w-4 text-muted-foreground" />
+                          <span className="text-sm text-muted-foreground">
+                            Restricted Access
+                          </span>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium">
+                            Manager Access
+                          </span>
+                          <Switch defaultChecked />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium">
+                            Staff Access
+                          </span>
+                          <Switch defaultChecked />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium">Read Only</span>
+                          <Switch />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium">
+                            Full Control
+                          </span>
+                          <Switch />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </CardContent>
+      </Card>
 
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Vendors List Panel */}
-        <div className="lg:col-span-4">
+        <div className="lg:col-span-3">
           <Card className="shadow-card h-fit">
             <CardHeader className="pb-4">
               <div className="flex items-center justify-between">
@@ -182,8 +555,8 @@ const Vendors = () => {
                       size="sm"
                       className="bg-primary hover:bg-primary/90"
                     >
-                      <Plus className="h-4 w-4 mr-2" />
-                      Add Vendor
+                      <Plus className="h-3 w-3 sm:mr-2" />
+                      <span className="hidden sm:inline">Add Vendor</span>
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[500px]">
@@ -314,7 +687,7 @@ const Vendors = () => {
         </div>
 
         {/* Stores Section */}
-        <div className="lg:col-span-8">
+        <div className="lg:col-span-9">
           <Card className="shadow-card">
             <CardHeader className="pb-4">
               <div className="flex items-center justify-between">
@@ -471,9 +844,16 @@ const Vendors = () => {
                             {store.active ? "Active" : "Inactive"}
                           </span>
                         </div>
-                        <Button size="sm" variant="outline" className="h-8">
-                          <Eye className="h-3 w-3 mr-1" />
-                          View Details
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="h-8"
+                          onClick={() =>
+                            navigate(`/admin/store-dashboard/${store.id}`)
+                          }
+                        >
+                          <Eye className="h-3 w-3 sm:mr-1" />
+                          <span className="hidden sm:inline">View Details</span>
                         </Button>
                       </div>
                     </CardContent>
@@ -526,6 +906,112 @@ const Vendors = () => {
           </Card>
         </div>
       </div>
+
+      {/* Edit Permissions Dialog */}
+      <Dialog
+        open={isEditPermissionsDialogOpen}
+        onOpenChange={setIsEditPermissionsDialogOpen}
+      >
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle>Edit Permissions</DialogTitle>
+            <DialogDescription>
+              Modify permissions for {editingUser?.name}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="view-outlet">View Outlet</Label>
+                <Switch
+                  id="view-outlet"
+                  checked={userPermissions.viewOutlet}
+                  onCheckedChange={(checked) =>
+                    setUserPermissions({
+                      ...userPermissions,
+                      viewOutlet: checked,
+                    })
+                  }
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="manage-outlet">Manage Outlet</Label>
+                <Switch
+                  id="manage-outlet"
+                  checked={userPermissions.manageOutlet}
+                  onCheckedChange={(checked) =>
+                    setUserPermissions({
+                      ...userPermissions,
+                      manageOutlet: checked,
+                    })
+                  }
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="edit-outlet">Edit Outlet</Label>
+                <Switch
+                  id="edit-outlet"
+                  checked={userPermissions.editOutlet}
+                  onCheckedChange={(checked) =>
+                    setUserPermissions({
+                      ...userPermissions,
+                      editOutlet: checked,
+                    })
+                  }
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="delete-outlet">Delete Outlet</Label>
+                <Switch
+                  id="delete-outlet"
+                  checked={userPermissions.deleteOutlet}
+                  onCheckedChange={(checked) =>
+                    setUserPermissions({
+                      ...userPermissions,
+                      deleteOutlet: checked,
+                    })
+                  }
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="manage-staff">Manage Staff</Label>
+                <Switch
+                  id="manage-staff"
+                  checked={userPermissions.manageStaff}
+                  onCheckedChange={(checked) =>
+                    setUserPermissions({
+                      ...userPermissions,
+                      manageStaff: checked,
+                    })
+                  }
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="view-reports">View Reports</Label>
+                <Switch
+                  id="view-reports"
+                  checked={userPermissions.viewReports}
+                  onCheckedChange={(checked) =>
+                    setUserPermissions({
+                      ...userPermissions,
+                      viewReports: checked,
+                    })
+                  }
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-end gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setIsEditPermissionsDialogOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button onClick={handleSavePermissions}>Save Permissions</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

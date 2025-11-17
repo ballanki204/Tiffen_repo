@@ -18,74 +18,89 @@ import {
   DollarSign,
   Calculator,
   Bell,
+  ArrowLeft,
+  Clock,
+  MapPin,
+  CreditCard,
+  Tag,
+  Plus,
+  Star,
 } from "lucide-react";
-import { NavLink } from "@/components/NavLink";
+import { NavLink, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const menuSections = [
   {
     section: "Dashboard",
     items: [
-      { to: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-    ],
-  },
-  {
-    section: "General",
-    items: [
-      { to: "/admin/users", icon: Users, label: "Users" },
-      { to: "/admin/riders", icon: Bike, label: "Riders" },
-      { to: "/admin/staff", icon: UserCheck, label: "Staff" },
-      { to: "/admin/vendors", icon: Building2, label: "Vendors" },
-      { to: "/admin/stores", icon: Package, label: "Stores" },
-    ],
-  },
-  {
-    section: "Management",
-    items: [
-      { to: "/admin/orders", icon: Package, label: "Orders" },
-      { to: "/admin/coupons", icon: Percent, label: "Coupons" },
-      { to: "/admin/cuisine", icon: Utensils, label: "Cuisine" },
-      { to: "/admin/banners", icon: Image, label: "Banners" },
-      { to: "/admin/tipping", icon: DollarSign, label: "Tipping" },
       {
-        to: "/admin/commission-rates",
-        icon: Calculator,
-        label: "Commission Rates",
-      },
-      {
-        to: "/admin/withdraw-requests",
-        icon: Building2,
-        label: "Withdraw Requests",
-      },
-      { to: "/admin/notifications", icon: Bell, label: "Notifications" },
-      { to: "/admin/reports", icon: FileText, label: "Reports" },
-      { to: "/admin/items", icon: Package, label: "Items" },
-      {
-        to: "/admin/purchase-vendors",
-        icon: ShoppingCart,
-        label: "Purchase Vendors",
+        to: "",
+        icon: LayoutDashboard,
+        label: "Dashboard",
       },
     ],
   },
   {
-    section: "Settings",
+    section: "Store",
     items: [
       {
-        to: "/admin/settings",
+        to: "profile",
+        icon: UserCheck,
+        label: "Profile",
+      },
+      { to: "timing", icon: Clock, label: "Timing" },
+      {
+        to: "location",
+        icon: MapPin,
+        label: "Location",
+      },
+      {
+        to: "payment",
+        icon: CreditCard,
+        label: "Payment",
+      },
+    ],
+  },
+  {
+    section: "Products Management",
+    items: [
+      {
+        to: "products",
+        icon: Package,
+        label: "Products",
+      },
+      { to: "category", icon: Tag, label: "Category" },
+      {
+        to: "options",
         icon: Settings,
-        label: "Settings",
-        comingSoon: true,
+        label: "Options",
       },
+      { to: "addon", icon: Plus, label: "Addon" },
     ],
+  },
+  {
+    section: "Orders",
+    items: [{ to: "orders", icon: Package, label: "Orders" }],
+  },
+  {
+    section: "Marketing",
+    items: [{ to: "marketing", icon: Zap, label: "Marketing" }],
+  },
+  {
+    section: "Reviews",
+    items: [{ to: "reviews", icon: Star, label: "Reviews" }],
   },
 ];
 
-export const SideNav = ({ collapsed = false }) => {
+export const StoreSideNav = ({ collapsed = false }) => {
+  const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState({
     Dashboard: !collapsed,
-    General: false,
-    Management: false,
-    Settings: false,
+    Store: false,
+    "Products Management": false,
+    Orders: false,
+    Marketing: false,
+    Reviews: false,
   });
 
   const toggleSection = (section) => {
@@ -97,6 +112,10 @@ export const SideNav = ({ collapsed = false }) => {
     }
   };
 
+  const handleBackToAdmin = () => {
+    navigate("/admin/vendors");
+  };
+
   return (
     <aside
       className={cn(
@@ -105,6 +124,20 @@ export const SideNav = ({ collapsed = false }) => {
       )}
     >
       <nav className="p-2 space-y-2">
+        {/* Back to Admin Button */}
+        <div className="mb-4">
+          <button
+            onClick={handleBackToAdmin}
+            className={cn(
+              "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors text-sm",
+              collapsed ? "justify-center" : ""
+            )}
+          >
+            <ArrowLeft className="h-4 w-4 flex-shrink-0" />
+            {!collapsed && <span>Back to Admin</span>}
+          </button>
+        </div>
+
         {menuSections.map((section) => (
           <div key={section.section}>
             {!collapsed && (

@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import { AdminLayout } from "./components/layout/AdminLayout";
+import { StoreLayout } from "./components/layout/StoreLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import Items from "./pages/admin/Items";
 import Outlets from "./pages/admin/Outlets";
@@ -75,12 +76,6 @@ const App = () => (
             <Route path="multi-vendor/vendors" element={<VendorsPage />} />
             <Route path="multi-vendor/stores" element={<StoresPage />} />
 
-            {/* Store Dashboard Route */}
-            <Route
-              path="store-dashboard/:storeId"
-              element={<StoreDashboard />}
-            />
-
             {/* Vendors */}
             <Route path="vendors" element={<Vendors />} />
 
@@ -100,6 +95,13 @@ const App = () => (
             {/* Settings */}
             <Route path="settings" element={<SettingsPage />} />
           </Route>
+
+          {/* Store Dashboard Route with Store Layout */}
+          <Route
+            path="/admin/store-dashboard/:storeId"
+            element={<StoreLayout />}
+          />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
