@@ -1,2 +1,2 @@
 - [x] Update src/pages/Login.jsx: Change CardDescription to "Developed by Team TheNexUs"
-- [x] Update src/components/layout/TopNav.jsx: Change logo text to "TiffinOS by Team TheNexUs"
+- [x] Update src/components/layout/TopNav.jsx: Make "TiffinOS" smaller and add "Developed by Team THENEXUS" below it

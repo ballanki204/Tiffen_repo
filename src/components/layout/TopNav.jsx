@@ -31,11 +31,16 @@ export const TopNav = ({ onMenuClick, collapsed }) => {
             <Menu className="h-5 w-5" />
           </Button>
           <div className="flex items-center gap-2">
-            <ChefHat className="h-6 w-6 text-primary" />
+            <ChefHat className="h-10 w-10 text-primary" />
             {!collapsed && (
-              <span className="text-xl font-bold text-foreground">
-                TheNexUS
-              </span>
+              <div className="flex flex-col">
+                <span className="text-lg font-bold text-foreground">
+                  TiffinOS
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  Developed by Team THENEXUS
+                </span>
+              </div>
             )}
           </div>
         </div>

@@ -44,9 +44,6 @@ const Login = () => {
           </div>
           <div className="space-y-2">
             <CardTitle className="text-3xl font-bold">TiffinOS Admin</CardTitle>
-            <CardDescription className="text-base">
-              Developed by Team TheNexUs
-            </CardDescription>
           </div>
         </CardHeader>
         <CardContent>
@@ -83,6 +80,9 @@ const Login = () => {
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
+          <CardDescription className="text-center p-2">
+            Developed by Team @THENEXUS.
+          </CardDescription>
         </CardContent>
       </Card>
     </div>
