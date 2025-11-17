@@ -19,7 +19,7 @@ A modern, responsive admin dashboard for managing tiffin services, built with Re
   - Users: Manage user accounts and roles
   - Riders: Handle delivery personnel
   - Staff: Administer staff members
-  - Vendors: Manage vendor partnerships
+  - Vendors: Manage vendor partnerships and store locations
   - Stores: Oversee store operations
   - Orders: Track and manage all orders
   - Coupons: Create and manage discount codes
@@ -30,6 +30,18 @@ A modern, responsive admin dashboard for managing tiffin services, built with Re
   - Withdraw Requests: Process vendor payouts
   - Notifications: Send user communications
 - **Multi-Vendor System**: Support for multiple vendors with dedicated dashboards
+- **Store Dashboard**: Individual store management with:
+  - Store Profile: Basic store information and settings
+  - Store Timing: Operating hours management
+  - Store Location: Address and coordinates management
+  - Store Payment: Payment method configuration
+  - Store Products: Menu item management
+  - Store Category: Product categorization
+  - Store Options: Customization options
+  - Store Addon: Additional item options
+  - Store Orders: Order tracking and management
+  - Store Marketing: Campaigns and promotions management
+  - Store Reviews: Customer feedback management
 - **Settings**: Application configuration and preferences
 - **Responsive Design**: Optimized for desktop and mobile devices
 - **Modern UI**: Clean, intuitive interface using ShadCN UI components
