@@ -1,9 +1,3 @@
-- [x] Fix store dashboard routing by moving nested routes to App.jsx and updating StoreLayout to use Outlet
-- [x] Test the navigation to profile, timing, location, payment, and other sections (App is running on localhost:8082)
-- [x] Add dummy data to StoreProducts.jsx page
-- [x] Add dummy data to StoreCategory.jsx page
-- [x] Add dummy data to StoreOptions.jsx page
-- [x] Add dummy data to StoreAddon.jsx page
-- [x] Add dummy data to StoreOrders.jsx page
-- [x] Add dummy data to StoreReviews.jsx page
-- [x] Add dummy data to StoreMarketing.jsx page
+# TODO: Remove Extra Icon from Favicon Area
+
+- [x] Edit index.html to remove the apple-touch-icon link to /placeholder.svg, keeping only the favicon (logo.png)

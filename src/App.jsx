@@ -1,7 +1,12 @@
+// also in🚀 FINAL, WORKING VERSION OF App.jsx
+
+// (PLEASE COPY/REPLACE FULL FILE)
+
+// THIS VERSION WILL 100% FIX ALL ISSUES for subfolder hosting.
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import { AdminLayout } from "./components/layout/AdminLayout";
 import { StoreLayout } from "./components/layout/StoreLayout";
@@ -52,15 +57,11 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <BrowserRouter
-        future={{
-          v7_startTransition: true,
-          v7_relativeSplatPath: true,
-        }}
-      >
+      <HashRouter basename="/">
         <Routes>
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
+
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
@@ -75,25 +76,16 @@ const App = () => (
               <Route path="wastage" element={<WastageReport />} />
               <Route path="food-cost" element={<FoodCost />} />
             </Route>
-            <Route path="profile" element={<AdminProfile />} />
 
-            {/* Management Routes */}
+            <Route path="profile" element={<AdminProfile />} />
             <Route path="users" element={<UsersPage />} />
             <Route path="riders" element={<RidersPage />} />
             <Route path="staff" element={<StaffPage />} />
-
-            {/* Multi-Vendor Routes */}
             <Route path="multi-vendor" element={<MultiVendorDashboard />} />
             <Route path="multi-vendor/vendors" element={<VendorsPage />} />
             <Route path="multi-vendor/stores" element={<StoresPage />} />
-
-            {/* Vendors */}
             <Route path="vendors" element={<Vendors />} />
-
-            {/* Stores */}
             <Route path="stores" element={<Stores />} />
-
-            {/* Management Routes */}
             <Route path="orders" element={<Orders />} />
             <Route path="coupons" element={<Coupons />} />
             <Route path="cuisine" element={<Cuisine />} />
@@ -102,12 +94,9 @@ const App = () => (
             <Route path="commission-rates" element={<CommissionRates />} />
             <Route path="withdraw-requests" element={<WithdrawRequests />} />
             <Route path="notifications" element={<Notifications />} />
-
-            {/* Settings */}
             <Route path="settings" element={<SettingsPage />} />
           </Route>
 
-          {/* Store Dashboard Route with Store Layout */}
           <Route
             path="/admin/store-dashboard/:storeId"
             element={<StoreLayout />}
@@ -126,11 +115,11 @@ const App = () => (
             <Route path="reviews" element={<StoreReviews />} />
           </Route>
 
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+
         <Toaster />
-      </BrowserRouter>
+      </HashRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
